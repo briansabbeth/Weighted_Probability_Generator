@@ -84,9 +84,10 @@ public class Weighted_Probability {
     public void double_probability(int clip_number)
     {
     	int temp = probability_list.get(clip_number);
-    	
+	    System.out.println("DOUBLE PROBABILITY The probability for " + clip_number + " = " + temp);  
+
     	for(int i = 0; i<temp; ++i)
-    	{
+    	{    		
     		probability_buckets.add(clip_number);
     	}
     	probability_list.set(clip_number, temp*2);
@@ -101,6 +102,7 @@ public class Weighted_Probability {
      */
 	public int  get_probability(int clip_number)
 	{
+
 		return probability_list.get(clip_number);		
 	}
 	
@@ -115,9 +117,24 @@ public class Weighted_Probability {
 		return probability_list;
 	}
 	
+	
+	
+	
 	public ArrayList<Integer> get_probability_buckets()
 	{
 		return probability_buckets;
+	}
+	
+	
+	
+	public void output_bucket()
+	{
+    	System.out.println(" " + probability_buckets.size());
+
+		for(int i = 0; i<probability_buckets.size(); ++i)
+		{
+    	    System.out.println(probability_buckets.get(i));  
+		}
 	}
 	
 }
