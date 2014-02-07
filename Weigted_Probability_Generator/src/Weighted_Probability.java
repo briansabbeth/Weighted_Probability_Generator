@@ -15,6 +15,10 @@
  *          played on the device.  
  */
 //
+//
+//
+//
+//
 
 import java.util.ArrayList;
 public class Weighted_Probability {
@@ -92,7 +96,7 @@ public class Weighted_Probability {
     		probability_buckets.add(clip_number);
     	}
     	probability_list.set(clip_number, temp*2);
-    	
+    	System.out.println("DOUBLE VALUE FOR " + clip_number + "IS  " + probability_list.get(clip_number));
     }
 
     /**

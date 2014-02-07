@@ -1,6 +1,7 @@
 //main for testing out the 
 //
 //
+//
 import java.util.ArrayList;
 
 public class Main {
@@ -34,11 +35,16 @@ public class Main {
 		
 		System.out.println("Probability of clip 4 after doubling the probability is  "+ wp.get_probability(4));
 
+		wp.double_probability(4);
 		wp.output_bucket();
 		System.out.println("Probability of clip 4 after doubling the probability is  "+ wp.get_probability(4));
 
 		wp.output_bucket();
+		wp.double_probability(4);
+		wp.output_bucket();
+		System.out.println("Probability of clip 4 after doubling the probability is  "+ wp.get_probability(4));
 
+		wp.output_bucket();
 		}
     
  
