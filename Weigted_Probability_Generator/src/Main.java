@@ -15,22 +15,16 @@ public class Main {
 		for (int i = 0;i<10;++i)
 		{
 			probability_list.add(i,i);
-			probability_bucket.add(i,i*2);		
+			probability_bucket.add(i,i);		
 		}
 		
 		Weighted_Probability wp = new Weighted_Probability(probability_list,probability_bucket);
-		System.out.println("SIZE IS "+probability_bucket.size());
-//	
-//	  	for (int i = 0;i< probability_bucket.size(); ++i)
-//		{
-//		    System.out.println(probability_bucket.get(i));  
-//		    System.out.println(probability_list.get(i));  
-//		    System.out.println( );  
-//	   	    
-//		}
-//		
+		System.out.println("SIZE IS "+ probability_bucket.size());
+
 		
+	   
 		wp.double_probability(2);
+		wp.output_bucket();
 		
 		}
     
