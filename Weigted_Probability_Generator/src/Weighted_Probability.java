@@ -47,6 +47,13 @@ public class Weighted_Probability {
 	private ArrayList<Integer> probability_buckets;
 	
 	
+	//A 2d array of repeated attempts
+	//    Contains the last three times a clip was played.,  
+	//    If in the last three times the clip was repeated four times
+	//    The probability for that specific clip will double.  
+	private int[][] repeat_table;
+	
+	
 	/**************************************************************************
 	 * PUBLIC FUNCTIONS
 	 **************************************************************************
@@ -59,10 +66,9 @@ public class Weighted_Probability {
 	 */
     Weighted_Probability(ArrayList<Integer> prob_bucket, ArrayList<Integer> prob_list)
 	{
-    	//////////BELOW MAY NOT BE TRUE; DEPENDING ON WHAT YOU READ///
-    	/////?????WHEN I TESTED THIS IT DID NOT CHANGE THE MEMORY FROM MAIN//////
-    	//this will not copy; instead it will change the data from the location in 
-    	//memory  the list and the bucket are being stored
+    	//0 row three column list which will be added to 
+    	ArrayList<Integer>[][] repeat_table = new ArrayList[prob_list.size()][3];
+    
     	probability_list = new ArrayList<Integer>(prob_list);
     	probability_buckets = new ArrayList<Integer>(prob_bucket);
     	//just for testing
@@ -216,9 +222,50 @@ public class Weighted_Probability {
     	    System.out.println(probability_buckets.get(i));  
 		}
 	}
+	
+	/*
+	 * @cliplist_index is the index of the cliplist from onCreate();
+	 * @same_turn indicates whether or not the function is being repeated in the same clip
+	 * When repeat is called: 
+	 * 	1)All indices in the inner arrayList will get pushed down.
+	 * 	   If this repeat is the fourth in three times: double probability
+	 *     Achieved by adding up the indices of the array.
+	 * 
+	 *  2)Push back the new repeat in the the array at the cliplist_index.
+	 *  3)
+	 *  
+	 */
+	public void on_repeat(int clip_index, boolean same_turn)
+	{
+		int sum = 0;
+		for(int i = 0;i<3;i++)
+		{	
+            sum = repeat_table[clip_index][i] + sum;       
+		}
+		if( sum > 3 )
+        {
+        	double_probability(clip_index);
+        }
+        
+	   	if(same_turn == false)
+	   	{
+	   		 for(int i = 0;i<2;++i)
+	   		 {
+	   			 repeat_table[clip_index][i] =  repeat_table[clip_index][i+1];
+	   		 }
+	   		repeat_table[clip_index][2] = 1;
+	   	 }
+	  	
+	   	
+	   	if(same_turn == true)
+	  	{
+	   		repeat_table[clip_index][2]++;
+	  	}
+	}
+	
 
 	/**************************************************************************
-	 * PRIVATE VARIABLES
+	 * PRIVATE FUNCTIONS
 	 **************************************************************************
 	*/
     private void reset_ten()
@@ -229,6 +276,22 @@ public class Weighted_Probability {
 			probability_list.add(1);		
 		}
 	}
+    
+    
+    private void initialize_repeat_table()
+    {
+     for(int i = 0; i< repeat_table.length; ++i)
+     {
+    	 for(int j = 0; j<3; ++j)
+    	 {
+    		 repeat_table[i][j] = 0;
+   	 
+    	 }
+     }
+    	
+    }
+ }
+    
 	    
 	
 	
@@ -236,4 +299,4 @@ public class Weighted_Probability {
 	
 	
 	
-}
+
