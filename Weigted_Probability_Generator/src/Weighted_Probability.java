@@ -263,6 +263,40 @@ public class Weighted_Probability {
 	  	}
 	}
 	
+	
+	/**
+	 * @returns the repeat_table after shifting it ten down.
+	 * Adds ten empty inner arrays initialized to zero.
+	 */
+	public int[][] get_shifted_repeat_table(int [][] repeat_table)
+	{
+		int size = probability_list.size();
+		int[][] temp_array = new int[size][3];
+		for(int i = 10;i<probability_list.size(); ++i)
+		{
+			for(int j = 0; j<3; ++j)
+			{
+				temp_array[i-10][j] = repeat_table[i][j];
+			}
+			
+		}
+		
+		for(int i = size-10; i < size; ++i)
+		{
+			for(int j = 0; j<3; ++j)
+			{
+				temp_array[i][j] = 0;
+			}
+			
+		}
+		
+		return temp_array;
+		
+	}
+	
+	
+
+	
 
 	/**************************************************************************
 	 * PRIVATE FUNCTIONS
